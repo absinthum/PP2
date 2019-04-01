@@ -1,0 +1,63 @@
+/*Sastaviti  program  na  programskom  jeziku  C  koji  vrši  određenu vrstu obrade  nad  ulaznim nizom/nizovima. Program treba da:
+a)učita sve potrebne podatke(dužinu niza, elemente niza, itd.);
+b)izvršizahtevanu obradu;
+c)ispiše sve dobijene rezultate;
+d)ponavlja prethodna tri koraka dok za dužinu niza/nizova ne bude unetanegativna vrednost
+f)proverava da li je moguće izbacivanjem najviše jednog elementa iz niza celih brojeva napraviti strogo  rastuću  sekvencu;
+ukoliko  je  moguće ispisati  poruku "DA",  a  u  suprotnom  poruku "NE";*/
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX_BR_EL 100
+int main() {
+	int a[MAX_BR_EL], n = 0, i;
+	do { /*vrti dok je n pozitivno*/
+		do {
+			printf("Unesite duzinu niza: ");
+			scanf("%d", &n);
+		} while (n > MAX_BR_EL);
+		if (n < 0) {
+			exit(main); /*izbacuje ako je n negativno*/
+		}
+		if (n == 1 || n == 0) {
+			printf("NE\n") /*ako se izbaci jedan clan nestaje niz*/
+		}
+		printf("Unesite clanove niza: ");
+		for (i = 0; i < n; i++) {
+			scanf("%d", &a[i]);
+		}
+		int p = 0;
+		i = 0;
+		/*dok je rastuci seta po nizu*/
+		while (a[i] < a[i + 1]) {
+			i++;
+		}
+		if (i == n && i > 1) {
+			printf("DA\n");
+		}
+		else if (i > 1) {
+			/*kad ne valja preskoci*/
+			int d;
+			if (a[i] > a[i + 2] && i != n-2) {
+				d = i;
+			}
+			else d = i + 1;
+			/*izbaci element iz niza*/
+			for (d = d; d < n; d++) {
+				a[d] = a[d + 1];
+			}
+			/*vidi da li su ostali u rast por*/
+			for (i = 0; i < n - 2; i++) {
+				if (a[i] < a[i + 1]) {
+					p++;
+				}
+			}
+			/*ispis*/ if (p == n - 2) {
+				printf("DA\n");
+			}
+			else {
+				printf("NE\n");
+			}
+		}
+	} while (1); /*beskonacna petlja, a exit(main) izbacuje*/
+	return 0;
+}
