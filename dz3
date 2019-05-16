@@ -1,0 +1,72 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include <string.h>
+#define K "dosta brus li"
+#define MN 100
+#define ML 30
+int main() {
+	char *tmp, **a, *str;
+	int s = 0, i = 0, p = 0, b = 0;
+	while (1) {
+		a = malloc(MN * sizeof(char*));
+		if (!a) exit(12);
+		do {
+			str = malloc(ML * sizeof(char));
+			gets(str);
+			if (!strcmp(str, "dosta brus li")) exit(123);
+			s = strlen(str);
+			if (!s) {
+				free(str);
+				break;
+			}
+			for (int i = 0; i < s; i++) {
+				str[i] = toupper(str[i]);
+			}
+			for (int i = 0; i < s-2; i++) {
+				if (str[i] == 70 && str[i + 1] == 79 && str[i + 2] == 82) {
+					for (int r = i; r < s - 3; r++) str[r] = str[r + 3];
+					//str = realloc(str + i, 0);
+					s -= 3;
+				}
+			}
+			for (int i = 0; i < s - 1; i++) {
+				if (str[i] == 68 && str[i + 1] == 79) {
+					for (int r = i; r < s - 2; r++) str[r] = str[r + 2];
+					//str = realloc(str + i, 0);
+					s -= 2;
+				}
+			}
+			for (int i = 0; i < s - 4; i++) {
+				if (str[i] == 87 && str[i + 1] == 72 && str[i + 2] == 73 && str[i + 3] == 76 && str[i + 4] == 69) {
+					for (int r = i; r < s - 5; r++) str[r] = str[r + 5];
+					//str = realloc(str + i, 0);
+					s -= 5;
+				}
+			}
+			for (int i = 0; i < s - 4; i++) {
+				if (str[i] == 85 && str[i + 1] == 78 && str[i + 2] == 84 && str[i + 3] == 73 && str[i + 4] == 76) {
+					for (int r = i; r < s - 5; r++) str[r] = str[r + 5];
+					//str = realloc(str + i, 0);
+					s -= 5;
+				}
+			}
+			for (int i = 0; i < s - 5; i++) {
+				if (str[i] == 82 && str[i + 1] == 69 && str[i + 2] == 80 && str[i + 3] == 69 && str[i + 4] == 65 && str[i + 5] == 84) {
+					for (int r = i; r < s - 6; r++) str[r] = str[r + 6];
+					//str = realloc(str + i, 0);
+					s -= 6;
+				}
+			}
+			str = realloc(str, s * sizeof(char) + 1);
+			p++;
+			*(a + b++) = str;
+		} while (1);
+		a = realloc(a, p*sizeof(char*));
+		for (int j = 0; j < p; j++) {
+			free(a + j);
+		}
+	}
+	getchar();
+	getchar();
+	return 0;
+}
